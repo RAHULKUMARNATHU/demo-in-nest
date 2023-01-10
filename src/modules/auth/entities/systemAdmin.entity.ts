@@ -1,0 +1,54 @@
+import { CommonEntity } from "src/common/entities/common.entity";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+
+import { OrganizationRole, SystemAdmin } from "../constants";
+@Entity("system_admins")
+export class SystemAdminEntity extends CommonEntity {
+  @Column({
+    name: "first_name",
+    type: "varchar",
+    nullable: false,
+    length: 50,
+  })
+  firstName: string;
+
+  @Column({
+    name: "last_name",
+    type: "varchar",
+    nullable: false,
+    length: 50,
+  })
+  lastName: string;
+
+  @Column({
+    unique: true,
+    name: "email",
+    type: "varchar",
+    nullable: true,
+    length: 50,
+  })
+  email: string;
+
+  @Column({
+    name: "password",
+    type: "varchar",
+    nullable: false,
+  })
+  password: string;
+
+  @Column({
+    name: "role",
+    type: "enum",
+    enum: SystemAdmin,
+    default: SystemAdmin.SYSTEMADMIN,
+    nullable: true,
+  })
+  role: SystemAdmin;
+
+  // @Column({
+  //   name: "email_confirm",
+  //   type: "boolean",
+  //   default: false,
+  // })
+  // email_confirm: boolean;
+}
